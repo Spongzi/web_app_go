@@ -20,11 +20,11 @@ type AppConfig struct {
 }
 
 type LogConfig struct {
-	Level      string `mapstructure:"level"`
-	FileName   string `mapstructure:"filename"`
-	MaxSize    int    `mapstructure:"max_size"`
-	Max_Age    int    `mapstructure:"max_age"`
-	Max_Backup int    `mapstructure:"max_backup"`
+	Level     string `mapstructure:"level"`
+	FileName  string `mapstructure:"filename"`
+	MaxSize   int    `mapstructure:"max_size"`
+	MaxAge    int    `mapstructure:"max_age"`
+	MaxBackup int    `mapstructure:"max_backup"`
 }
 
 type MysqlConfig struct {
@@ -38,10 +38,10 @@ type MysqlConfig struct {
 }
 
 type RedisConfig struct {
-	host     string `mapstructure:"host"`
-	port     int    `mapstructure:"port"`
-	password string `mapstructure:"password"`
-	db       int    `mapstructure:"db"`
+	Host     string `mapstructure:"host"`
+	Port     int    `mapstructure:"port"`
+	Password string `mapstructure:"password"`
+	Db       int    `mapstructure:"db"`
 	PoolSize int    `mapstructure:"pool_size"`
 }
 
