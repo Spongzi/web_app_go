@@ -1,11 +1,13 @@
 package main
 
 import (
-	"WebApp/dao/mysql"
-	"WebApp/dao/redis"
-	"WebApp/logger"
-	"WebApp/settings"
 	"fmt"
+	"go.uber.org/zap"
+	"webapp/dao/mysql"
+	"webapp/dao/redis"
+	"webapp/logger"
+	"webapp/routers"
+	"webapp/settings"
 )
 
 func main() {
@@ -17,13 +19,19 @@ func main() {
 	if err := logger.Init(); err != nil {
 		fmt.Println("Logger init failed", err)
 	}
+	defer zap.L().Sync()
 	// 3. 连接数据库
 	if err := mysql.Init(); err != nil {
 		fmt.Println("Mysql init failed", err)
 	}
+	defer mysql.Close()
 	// 4. 连接redis
 	if err := redis.Init(); err != nil {
 		fmt.Println("redis init failed", err)
 	}
+	defer redis.Close()
 	// 5. 路由管理
+	r := routers.SetUp()
+	// 6. 启动服务
+	panic(r.Run(":8080"))
 }
